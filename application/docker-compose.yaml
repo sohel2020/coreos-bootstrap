@@ -2,6 +2,7 @@ version: "2"
 services:
   tutum:
     image: tutum/hello-world
+    mem_limit: 20m
     ports:
       - "80"
     labels:
@@ -18,5 +19,5 @@ services:
      - "traefik.frontend.rateLimit.rateSet.tutum.burst=3"
      - "traefik.backend.healthcheck.path=/health"
      - "traefik.backend.healthcheck.interval=1s"
-     - "traefik.backend.healthcheck.port=8080"
+     - "traefik.backend.healthcheck.port=80"
      - "traefik.backend.healthcheck.scheme=http"

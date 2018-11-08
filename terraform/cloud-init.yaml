@@ -133,13 +133,13 @@ write_files:
       }
 
       setup_ssh_keys() {
-        if [ ! -d ${ssh_dir} ] ; then
+        if [ ! -d $ssh_dir ] ; then
           mkdir $ssh_dir
         fi
-        if [ ! -f ${ssh_dir}/ansible ] ; then
+        if [ ! -f $ssh_dir/ansible ] ; then
           chown core:core $ssh_dir
-          ssh-keygen -b 2048 -t rsa -f ${ssh_dir}/ansible -q -N ""
-          cp ${ssh_dir}/ansible.pub /home/core/.ssh/authorized_keys.d
+          ssh-keygen -b 2048 -t rsa -f $ssh_dir/ansible -q -N ""
+          cp $ssh_dir/ansible.pub /home/core/.ssh/authorized_keys.d
           update-ssh-keys
         fi
       }
@@ -168,4 +168,7 @@ write_files:
       setup_ssh_keys
       inventory_generator
       run_docker
+      if [[ -d /tmp/coreos-bootstrap ]]; then
+        rm -rf /tmp/coreos-bootstrap
+      fi
       # vaultpass : a2J1RWF5dzc2Z2NwCg==
