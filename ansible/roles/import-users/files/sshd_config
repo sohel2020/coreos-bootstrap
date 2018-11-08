@@ -1,8 +1,0 @@
-Subsystem sftp internal-sftp
-ClientAliveInterval 180
-UseDNS no
-UsePAM yes
-PrintLastLog no # handled by PAM
-PrintMotd no # handled by PAM
-AuthorizedKeysCommand /opt/bin/authorized_key_command.sh
-AuthorizedKeysCommandUser root

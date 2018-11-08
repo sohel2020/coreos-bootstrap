@@ -27,9 +27,10 @@ coreos:
         ExecStart=/root/bootstrap.sh
 
 write_files:
-  - path: /root/.ssh/deployment.pem
-    permissions: 0444
+  - path: /root/.ssh/deployment.key
+    permissions: 0600
     content: |
+      -----BEGIN RSA PRIVATE KEY-----
       MIIJKQIBAAKCAgEAyj8VRor5N12Ac+UnQMtBYXMopLFpEB81Qq9v5INDieMfkmJF
       INNupxK2wJ35zYPtmsGeAh8TGa1sRyEN562CSKlEVsP3CdWGvjGb4GsPRJbXUDVw
       Ip8rh/7w7QIgZSeJ6CKXt9Y021IJSlxrQ8CZ7xgvOp940IWnlQ+02ZpJ062cANAu
@@ -79,20 +80,19 @@ write_files:
       OSD8AK6WcDFXLybFuZZrWXfYPSQ6T+x03ReSK/npt9f1AGO7VUuYqa8ogf61Ijj8
       /N51QPxM01Cp/YDZ0EvnirIQIr3Ivag6JcvzsdoQk0jau1FaJcnIXei6akaqDZqA
       wH9Gcv5OnTMFD7u3bfiwmABRFoBao6ZImYDJoB+4gpBO1nRghieqQT2QJZEQ
+      -----END RSA PRIVATE KEY-----
 
-write_files:
   - path: /root/.ssh/config
     permissions: 0644
     content: |
       Host github.com
       Port 22
       Hostname github.com
-      IdentityFile "/root/.ssh/deployment.pem"
+      IdentityFile "/root/.ssh/deployment.key"
       TCPKeepAlive yes
       IdentitiesOnly yes
       StrictHostKeyChecking no
 
-write_files:
   - path: /etc/ssh/sshd_config
     permissions: 0644
     content: |
@@ -106,8 +106,6 @@ write_files:
       AuthorizedKeysCommand /opt/bin/authorized_key_command.sh
       AuthorizedKeysCommandUser root
 
-
-write_files:
   - path: /root/bootstrap.sh
     permissions: 0755
     content: |
@@ -170,4 +168,4 @@ write_files:
       setup_ssh_keys
       inventory_generator
       run_docker
-      # vaultpass : dsfjlkasdjflkjaslfjasdklfjlksadj
+      # vaultpass : a2J1RWF5dzc2Z2NwCg==
