@@ -7,15 +7,15 @@
   with_items:
     - "{{ required_files }}"
 
-- name: Copy configuration file to /etc directory
-  template: "src=ssh.conf.j2 dest=/etc/ssh.conf mode=0644"
-- name: Remove symlink
-  file:
-   path: "/etc/ssh/sshd_config"
-   state: absent
+# - name: Copy configuration file to /etc directory
+#   template: "src=ssh.conf.j2 dest=/etc/ssh.conf mode=0644"
+# - name: Remove symlink
+#   file:
+#    path: "/etc/ssh/sshd_config"
+#    state: absent
 
-- name: Copy sshd configuration
-  copy: "src=sshd_config dest=/etc/ssh/sshd_config mode=0644"
+# - name: Copy sshd configuration
+#   copy: "src=sshd_config dest=/etc/ssh/sshd_config mode=0644"
 
 - name: Copy Unit files
   copy: "src={{ item }} dest=/etc/systemd/system/{{ item }} mode=0644"
@@ -23,6 +23,5 @@
     - "{{ unit_files }}"
   notify:
     - reload systemd
-    - restart sshd
     - restart import-users service
     - restart import-users timer

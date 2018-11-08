@@ -5,3 +5,6 @@
   ignore_errors: True
   with_items:
     - systemctl daemon-reload
+
+- name: restart sshd
+  service: name=sshd state=restarted enabled=yes
