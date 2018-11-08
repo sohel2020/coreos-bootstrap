@@ -1,0 +1,13 @@
+[Unit]
+Description=traefik
+# start this unit only after docker has started
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+ExecStart=/bin/bash -c '/opt/bin/traefik --logLevel="INFO" --traefikLog.filePath="/var/log/traefik.log" --traefikLog.format="json" --accessLog.filePath="/var/log/traefik-access.log" --accessLog.format="json" --accessLog.filters.statusCodes="200,300-302" --accessLog.filters.retryAttempts="true" -c /etc/traefik.toml'
+ExecStopPost=/bin/bash -c '/usr/bin/systemd-run --no-block --on-active=30 systemctl start traefik'
+[Install]
+WantedBy=multi-user.target

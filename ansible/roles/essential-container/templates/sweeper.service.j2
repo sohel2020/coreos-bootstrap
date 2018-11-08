@@ -1,0 +1,9 @@
+[Unit]
+Description=Runs sweeper to clean old docker container
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh -c '/opt/bin/sweeper || true'
+
+[Install]
+WantedBy=multi-user.target

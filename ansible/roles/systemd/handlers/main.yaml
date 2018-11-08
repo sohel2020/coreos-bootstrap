@@ -1,0 +1,7 @@
+---
+# The next Ansible 1.9.X should handle this automatically
+- name: reload systemd
+  command: "{{ item }}"
+  ignore_errors: True
+  with_items:
+    - systemctl daemon-reload

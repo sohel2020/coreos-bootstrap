@@ -1,0 +1,5 @@
+---
+- include: python-bootstrap.yaml
+- include: system-bootstrap.yaml
+- include: import-users.yaml
+- include: essential-container.yaml

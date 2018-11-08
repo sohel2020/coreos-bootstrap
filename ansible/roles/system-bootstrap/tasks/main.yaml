@@ -1,0 +1,21 @@
+---
+- name: Disable update-engine service
+  service: name=update-engine state=stopped enabled=false
+
+- name: Reset update-engine failed state
+  command: systemctl reset-failed update-engine
+
+- name: Create directory if not exists
+  file: path=/opt/bin state=directory
+
+- name: Download docker compose
+  get_url:
+    url: https://github.com/docker/compose/releases/download/{{ DC_VERSION }}/docker-compose-Linux-x86_64
+    dest: /opt/bin/docker-compose
+    mode: 0755
+
+- name: Copy timezone unit file
+  template: "src=timezone-dhaka.service.j2 dest=/etc/systemd/system/timezone-dhaka.service mode=0644"
+  notify:
+    - reload systemd
+    - set timezone dhaka

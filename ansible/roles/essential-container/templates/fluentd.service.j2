@@ -1,0 +1,17 @@
+[Unit]
+Description=fluentd (Docker)
+# start this unit only after docker has started
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+
+ExecStartPre=-/bin/docker kill fluentd
+ExecStartPre=-/bin/docker rm fluentd
+ExecStartPre=-/bin/docker pull "fluent/fluentd:debian"
+ExecStart=/bin/docker run --name fluentd -p 24224:24224 fluent/fluentd:debian
+ExecStop=/usr/bin/docker stop fluentd
+[Install]
+WantedBy=multi-user.target

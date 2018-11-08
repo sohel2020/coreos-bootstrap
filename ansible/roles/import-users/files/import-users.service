@@ -1,0 +1,6 @@
+[Unit]
+Description=Import user from AWS IAM
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/sh -c '/opt/bin/import_users.sh'

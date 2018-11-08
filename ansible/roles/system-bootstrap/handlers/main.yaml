@@ -1,0 +1,2 @@
+- name: set timezone dhaka
+  service: name=timezone-dhaka state=started enabled=yes

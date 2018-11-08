@@ -1,0 +1,10 @@
+iam_group: "ssh-sudoers,ssh-nonsudoers"
+sudo_group: "ssh-sudoers"
+iam_role: "user-management-role"
+assume_role: "arn:aws:iam::067811574341:role/user-management-role"
+required_files:
+  - authorized_key_command.sh
+  - import_users.sh
+unit_files:
+  - import-users.service
+  - import-users.timer

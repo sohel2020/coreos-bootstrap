@@ -1,0 +1,25 @@
+[Unit]
+Description=cadvisor (Docker)
+# start this unit only after docker has started
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+
+ExecStartPre=-/bin/docker kill cadvisor
+ExecStartPre=-/bin/docker rm cadvisor
+ExecStartPre=-/bin/docker pull "google/cadvisor:latest"
+ExecStart=/bin/docker run \
+  --volume=/:/rootfs:ro \
+  --volume=/var/run:/var/run:ro \
+  --volume=/sys:/sys:ro \
+  --volume=/var/lib/docker/:/var/lib/docker:ro \
+  --volume=/dev/disk/:/dev/disk:ro \
+  --publish=8080:8080 \
+  --name=cadvisor \
+  google/cadvisor:latest
+ExecStop=/usr/bin/docker stop cadvisor
+[Install]
+WantedBy=multi-user.target

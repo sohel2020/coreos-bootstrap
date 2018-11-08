@@ -1,0 +1,22 @@
+version: "2"
+services:
+  tutum:
+    image: tutum/hello-world
+    ports:
+      - "80"
+    labels:
+     - "traefik.enable=true"
+     - "traefik.port=80"
+     - "traefik.protocol=http"
+     - "traefik.backend=tutum"
+     - "traefik.frontend.entryPoints=https"
+     - "traefik.frontend.rule=Host: tutum.mytonic.com"
+     - "traefik.frontend.redirect.permanent=true"
+     - "traefik.frontend.rateLimit.extractorFunc=client.ip"
+     - "traefik.frontend.rateLimit.rateSet.tutum.period=10s"
+     - "traefik.frontend.rateLimit.rateSet.tutum.average=2"
+     - "traefik.frontend.rateLimit.rateSet.tutum.burst=3"
+     - "traefik.backend.healthcheck.path=/health"
+     - "traefik.backend.healthcheck.interval=1s"
+     - "traefik.backend.healthcheck.port=8080"
+     - "traefik.backend.healthcheck.scheme=http"

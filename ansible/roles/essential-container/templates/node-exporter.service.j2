@@ -1,0 +1,17 @@
+[Unit]
+Description=node-exporter (Docker)
+# start this unit only after docker has started
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+
+ExecStartPre=-/bin/docker kill node-exporter
+ExecStartPre=-/bin/docker rm node-exporter
+ExecStartPre=-/bin/docker pull "quay.io/prometheus/node-exporter:v0.15.2"
+ExecStart=/bin/docker run --name node-exporter -v /var/lib/node_exporter:/var/lib/node_exporter -v /proc:/host/proc -v /sys:/host/sys -p 9100:9100 quay.io/prometheus/node-exporter:v0.15.2 --web.listen-address=0.0.0.0:9100 --path.procfs=/host/proc --path.sysfs=/host/sys --collector.textfile.directory=/var/lib/node_exporter
+ExecStop=/usr/bin/docker stop node-exporter
+[Install]
+WantedBy=multi-user.target

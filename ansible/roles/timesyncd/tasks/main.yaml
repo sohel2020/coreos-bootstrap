@@ -1,0 +1,6 @@
+---
+- name: Create timesyncd.conf
+  template: src=timesyncd.conf.j2 dest=/etc/systemd/timesyncd.conf mode=0644
+  when: ntp_servers|length > 0
+  notify:
+    - restart systemd-timesyncd service

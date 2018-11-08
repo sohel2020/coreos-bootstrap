@@ -1,0 +1,10 @@
+SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
+AUTHORIZED_KEYS_COMMAND_FILE="/opt/bin/authorized_keys_command.sh"
+IMPORT_USERS_SCRIPT_FILE="/opt/bin/import_users.sh"
+MAIN_CONFIG_FILE="/etc/ssh.conf"
+IAM_AUTHORIZED_GROUPS="{{ iam_group }}"
+LOCAL_MARKER_GROUP="iam-synced-users"
+LOCAL_GROUPS=""
+SUDOERS_GROUPS="{{ sudo_group }}"
+ASSUMEROLE="{{ assume_role }}"
+DONOTSYNC=0

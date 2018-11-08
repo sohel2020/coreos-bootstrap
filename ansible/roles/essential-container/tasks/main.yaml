@@ -1,0 +1,30 @@
+---
+- name: Download traefik binary
+  get_url:
+    url: https://github.com/containous/traefik/releases/download/{{ traefik_version }}/traefik_linux-amd64
+    dest: /opt/bin/traefik
+    mode: 0755
+
+- name: Copy traefik configuration file
+  copy: "src=traefik.toml dest=/etc/traefik.toml mode=0644"
+
+- name: Copy sweeper script
+  copy: "src=sweeper.sh dest=/opt/bin/sweeper mode=0755"
+
+- name: Copy traefik configuration file
+  copy: "src={{ item }} dest=/etc/ssl/{{ item }} mode=0644"
+  with_items:
+    - "{{ cert_file }}"
+
+- name: Copy required file to /opt/bin directory
+  template: "src={{ item }}.j2 dest=/etc/systemd/system/{{ item }} mode=0644"
+  with_items:
+    - "{{ unit_files }}"
+  notify:
+    - reload systemd
+    - restart traefik service
+    - restart cadvisor service
+    - restart node-exporter service
+    - restart fluentd service
+    - restart sweeper service
+    - restart sweeper timer

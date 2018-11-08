@@ -1,0 +1,9 @@
+[Unit]
+Description=Run sweeper dailly
+
+[Timer]
+OnBootSec=600
+OnCalendar=daily
+
+[Install]
+WantedBy=multi-user.target

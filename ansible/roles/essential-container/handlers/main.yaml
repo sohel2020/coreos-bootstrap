@@ -1,0 +1,17 @@
+- name: restart cadvisor service
+  service: name=cadvisor.service state=restarted enabled=yes
+
+- name: restart node-exporter service
+  service: name=node-exporter.service state=restarted enabled=yes
+
+- name: restart fluentd service
+  service: name=fluentd.service state=restarted enabled=yes
+
+- name: restart traefik service
+  service: name=traefik.service state=restarted enabled=yes
+
+- name: restart sweeper service
+  service: name=sweeper.service state=restarted enabled=yes
+
+- name: restart sweeper timer
+  service: name=sweeper.timer state=restarted enabled=yes
