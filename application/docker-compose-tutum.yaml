@@ -3,6 +3,7 @@ services:
   tutum:
     image: tutum/hello-world
     mem_limit: 20m
+    restart: always
     ports:
       - "80"
     labels:

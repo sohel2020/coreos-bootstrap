@@ -1,0 +1,24 @@
+version: "2"
+services:
+  nginx:
+    image: nginx
+    mem_limit: 20m
+    restart: always
+    ports:
+      - "80"
+    labels:
+     - "traefik.enable=true"
+     - "traefik.port=80"
+     - "traefik.protocol=http"
+     - "traefik.backend=nginx"
+     - "traefik.frontend.entryPoints=https"
+     - "traefik.frontend.rule=Host: nginx.mytonic.com"
+     - "traefik.frontend.redirect.permanent=true"
+     - "traefik.frontend.rateLimit.extractorFunc=client.ip"
+     - "traefik.frontend.rateLimit.rateSet.nginx.period=60s"
+     - "traefik.frontend.rateLimit.rateSet.nginx.average=80"
+     - "traefik.frontend.rateLimit.rateSet.nginx.burst=85"
+     - "traefik.backend.healthcheck.path=/health"
+     - "traefik.backend.healthcheck.interval=1s"
+     - "traefik.backend.healthcheck.port=80"
+     - "traefik.backend.healthcheck.scheme=http"
