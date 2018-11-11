@@ -1,0 +1,19 @@
+[Unit]
+Description=docker auto healer
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+Restart=always
+
+ExecStartPre=-/bin/docker kill auto-healer
+ExecStartPre=-/bin/docker rm auto-healer
+ExecStartPre=-/bin/docker pull "eon01/d-ealer"
+ExecStart=/bin/docker run \
+  --volume=/var/run/docker.sock:/var/run/docker.sock \
+  --name=auto-healer \
+  eon01/d-ealer
+ExecStop=/usr/bin/docker stop auto-healer
+[Install]
+WantedBy=multi-user.target

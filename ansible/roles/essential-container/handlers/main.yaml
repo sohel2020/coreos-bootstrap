@@ -10,6 +10,9 @@
 - name: restart traefik service
   service: name=traefik.service state=restarted enabled=yes
 
+- name: restart autohealer service
+  service: name=traefik.service state=restarted enabled=yes
+
 - name: restart sweeper service
   service: name=sweeper.service state=restarted enabled=yes
 

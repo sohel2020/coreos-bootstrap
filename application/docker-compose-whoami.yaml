@@ -22,3 +22,4 @@ services:
      - "traefik.backend.healthcheck.interval=1s"
      - "traefik.backend.healthcheck.port=80"
      - "traefik.backend.healthcheck.scheme=http"
+     - "com.dealer.activate=1"

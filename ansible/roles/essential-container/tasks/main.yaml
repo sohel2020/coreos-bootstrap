@@ -26,5 +26,6 @@
     - restart cadvisor service
     - restart node-exporter service
     - restart fluentd service
+    - restart autohealer service
     - restart sweeper service
     - restart sweeper timer
