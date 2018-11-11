@@ -1,7 +1,7 @@
 version: "2"
 services:
   nginx:
-    image: nginx
+    image: sohel2020/tools
     mem_limit: 20m
     restart: always
     ports:
@@ -18,7 +18,7 @@ services:
      - "traefik.frontend.rateLimit.rateSet.nginx.period=60s"
      - "traefik.frontend.rateLimit.rateSet.nginx.average=80"
      - "traefik.frontend.rateLimit.rateSet.nginx.burst=85"
-     - "traefik.backend.healthcheck.path=/health"
+     - "traefik.backend.healthcheck.path=/"
      - "traefik.backend.healthcheck.interval=1s"
      - "traefik.backend.healthcheck.port=80"
      - "traefik.backend.healthcheck.scheme=http"

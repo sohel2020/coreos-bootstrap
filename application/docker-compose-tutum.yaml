@@ -18,7 +18,7 @@ services:
      - "traefik.frontend.rateLimit.rateSet.tutum.period=10s"
      - "traefik.frontend.rateLimit.rateSet.tutum.average=2"
      - "traefik.frontend.rateLimit.rateSet.tutum.burst=3"
-     - "traefik.backend.healthcheck.path=/health"
+     - "traefik.backend.healthcheck.path=/"
      - "traefik.backend.healthcheck.interval=1s"
      - "traefik.backend.healthcheck.port=80"
      - "traefik.backend.healthcheck.scheme=http"

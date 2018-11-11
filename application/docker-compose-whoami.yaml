@@ -18,7 +18,7 @@ services:
      - "traefik.frontend.rateLimit.rateSet.whoami.period=10s"
      - "traefik.frontend.rateLimit.rateSet.whoami.average=6"
      - "traefik.frontend.rateLimit.rateSet.whoami.burst=10"
-     - "traefik.backend.healthcheck.path=/health"
+     - "traefik.backend.healthcheck.path=/"
      - "traefik.backend.healthcheck.interval=1s"
      - "traefik.backend.healthcheck.port=80"
      - "traefik.backend.healthcheck.scheme=http"
